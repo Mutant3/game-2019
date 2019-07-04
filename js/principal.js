@@ -12,7 +12,7 @@ const pageTutorial = new Tutorial();
 const pageRanking = new Ranking();
 const tela = new telaRanking();
 
-game.state.add("tela", tela, false);
+game.state.add("telaCadastro", tela, false);
 
 game.state.add('Menu', pagePrincipal, true);
 

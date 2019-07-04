@@ -9,35 +9,51 @@ class telaRanking
         this.txtNome = null;
         this.txtPontos = null;
     }
+
+    preload(){
+        this.load.image('fundo', 'assets/menu.png');
+        this.load.image('borda', 'assets/fases/borda2.png')
+
+
+        this.load.image('jogar', 'assets/buttons/jogar.png')
+        this.load.image('ranking', 'assets/buttons/showranking.png')
+        this.load.image('salvar', 'assets/buttons/salvar.png')
+
+    }
     create()
     {
-        this.stage.backgroundColor = '#806000';
-        this.add.text(10,10, "Documentação: https://github.com/azerion/phaser-input");
+        this.game.add.sprite(0, 0, 'fundo');
+        this.game.add.sprite(0, 0, 'borda');
+
+
         //Esse é o campo para habilitar o texto
         game.plugins.add(PhaserInput.Plugin);
         
-        this.txtNome = this.add.inputField(10, 90,
+        this.txtNome = this.add.inputField(250, 140,
         {
+            
             font: '18px Arial',
-                    fill: '#ffffff',
-                    fillAlpha: 0,
+                    fill: 'blue',
+                    fillAlpha: 1,
                     fontWeight: 'bold',
                     forceCase: PhaserInput.ForceCase.upper,
-                    width: 300,
+                    width: 250,
                     max: 20,
                     padding: 8,
                     placeHolder: 'Digite seu nome',
                     textAlign: 'left',
-                    zoom: true
-        });
+                    zoom: true,
+            
+        }
+        );
 
-        this.txtPontos = this.add.inputField(400, 90,
+        this.txtPontos = this.add.inputField(278, 200,
         {
             font: '18px Arial',
                     fill: '#ffffff',
-                    fillAlpha: 0,
+                    fillAlpha: 1,
                     fontWeight: 'bold',
-                    width: 300,
+                    width: 200,
                     max: 20,
                     padding: 8,
                     placeHolder: 'Digite os pontos',
@@ -45,16 +61,10 @@ class telaRanking
                     zoom: true
         });
 
-        var btnsalvar = this.add.text(50,150, "SALVAR");
-        var btnrnk = this.add.text(200,150," VER RANKING");
+        const salvarBtn = game.add.button(game.world.centerX - 75, 260, 'salvar', this.salvar);
+        const rankingBtn = game.add.button(game.world.centerX - 75, 380, 'ranking', this.exibir);
+        const jogarBtn = game.add.button(game.world.centerX -75, 320, 'jogar', this.jogar);
 
-        btnsalvar.inputEnabled = true;
-        btnsalvar.events.onInputDown.add(this.salvar, this);
-
-        btnrnk.inputEnabled = true;
-        btnrnk.events.onInputDown.add(this.exibir, this);
-
-        this.textocomranking=this.add.text(10,300, "");
 
 }
 
@@ -71,19 +81,16 @@ salvar()
 
     alert("SALVO COM SUCESSO");
  
-    game.state.start("Menu")
+    game.state.start("Game")
+}
+
+jogar(){
+    game.state.start("Game")
 }
 
 exibir()
 {
-    let lista;
-    
-     lista = this.ranking.lista;
-        this.textocomranking.text = "RANKING\n";
-        for(let i=0;i<lista.length;i++)
-        {
-            this.textocomranking.text +=lista[i].nome + " -  " + lista[i].pontos + "\n";
-        }
+    game.state.start('Ranking');
     
 }
 

@@ -48,7 +48,7 @@ class Menu {
         
         game.time.events.repeat(Phaser.Timer.SECOND * 0.5, 10, this.carregarEstrelas, this);
 
-
+        alert('O Game e sons funcionam corretamente no FIREFOX!');
     }
     
     update(){
@@ -58,7 +58,7 @@ class Menu {
     start(){
         this.click = game.add.audio('click');
         this.click.play();
-        game.state.start('Game')        
+        game.state.start('telaCadastro')        
     }
     
     config(){
