@@ -18,6 +18,10 @@ class telaRanking
         this.load.image('jogar', 'assets/buttons/jogar.png')
         this.load.image('ranking', 'assets/buttons/showranking.png')
         this.load.image('salvar', 'assets/buttons/salvar.png')
+        
+        this.load.audio('click', 'assets/sounds/click.mp3', {
+            instances: 1
+        })
 
     }
     create()
@@ -40,7 +44,7 @@ class telaRanking
                     width: 250,
                     max: 20,
                     padding: 8,
-                    placeHolder: 'Digite seu nome',
+                    placeHolder: '           Digite seu nome',
                     textAlign: 'left',
                     zoom: true,
             
@@ -50,7 +54,7 @@ class telaRanking
         this.txtPontos = this.add.inputField(278, 200,
         {
             font: '18px Arial',
-                    fill: '#ffffff',
+                    fill: 'blue',
                     fillAlpha: 1,
                     fontWeight: 'bold',
                     width: 200,
@@ -61,10 +65,12 @@ class telaRanking
                     zoom: true
         });
 
-        const salvarBtn = game.add.button(game.world.centerX - 75, 260, 'salvar', this.salvar);
+        const salvarBtn = game.add.button(game.world.centerX - 75, 260, 'salvar', null);
         const rankingBtn = game.add.button(game.world.centerX - 75, 380, 'ranking', this.exibir);
         const jogarBtn = game.add.button(game.world.centerX -75, 320, 'jogar', this.jogar);
 
+        salvarBtn.inputEnabled = true;
+        salvarBtn.events.onInputDown.add(this.salvar, this);
 
 }
 
@@ -80,16 +86,21 @@ salvar()
     this.ranking.gravar(nome,pontos);
 
     alert("SALVO COM SUCESSO");
- 
+    
     game.state.start("Game")
+ 
 }
 
 jogar(){
+    this.click = game.add.audio('click');
+    this.click.play();
     game.state.start("Game")
 }
 
 exibir()
 {
+    this.click = game.add.audio('click');
+    this.click.play();
     game.state.start('Ranking');
     
 }

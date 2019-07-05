@@ -28,6 +28,7 @@ class Jogo {
         this.colidepiso2 = null;
         this.colidepiso = null;
         this.H = null;
+        this.quantidade = 5;
 
         this.W = null;
         this.A = null;
@@ -62,14 +63,19 @@ class Jogo {
         this.vidas = new Vida();
         this.casas = new Casa();
        
+        
+              
+      }
 
-    }
     init() {
         this.physics.startSystem(Phaser.Physics.ARCADE);
     }
     preload() {
        //SKINS PERSONAGEM
        this.load.spritesheet('personagem', this.personagem.sprite, this.personagem.largura, this.personagem.altura);
+
+      this.load.image('botão', 'assets/buttons/Exit.png')
+
 
        //boss
        this.load.spritesheet('boss', this.boss.sprite1, this.boss.largura, this.boss.altura)
@@ -189,6 +195,9 @@ class Jogo {
         this.grupoPremios = this.add.physicsGroup();
         this.premios.iniciar(this.grupoPremios);
 
+      const exitBtn = game.add.button(game.world.centerX - 400, 540, 'botão', this.exit);
+
+
         // criação e probalidade inimigos e premios
         // for(this.limite=0; this.limite<=5; this.limite++){
         //   this.random = Math.random()*4;
@@ -215,6 +224,15 @@ class Jogo {
         }
 
 
+      if (fasesJogo == 2) {
+        this.fase2();
+      }
+      else if (fasesJogo == 3) {
+        this.fase3();
+      }
+      else {
+
+      } 
 
         }
 
@@ -277,6 +295,7 @@ class Jogo {
 
       else if(this.Q.isDown){
           location.reload();
+          game.state.start('Game')
       }
         //Andar WASD
       else if (this.A.isDown) {
@@ -386,7 +405,7 @@ class Jogo {
 
 
           ///                              reset                           ///
-        if(this.premios.grupo.children.length + this.inimigos.grupo.children.length < 7){
+        if(this.premios.grupo.children.length + this.inimigos.grupo.children.length < 5){
           this.random = Math.random()*2;
           var lado = Math.random()*2;
           if(this.random<1.5){
@@ -394,6 +413,7 @@ class Jogo {
               this.inimigos.aleatorio = 0.5;
               this.inimigos.add(0, Math.round(Math.random() * (140 - 550) / 160) * 160 + 550, this.inimigos.nomeInimigo);
             }
+      
             else{
               this.inimigos.aleatorio = 1.5;
               this.inimigos.add(800, Math.round(Math.random() * (140 - 550) / 160) * 160 + 550, this.inimigos.nomeInimigo);
@@ -567,6 +587,7 @@ class Jogo {
       this.imagem = null;
       this.nPlataformas = 10;
       this.contagemVidas = null;
+      this.quantidade = 7;
 
       this.grupoVidas = this.add.physicsGroup();
       this.vidas.iniciar(this.grupoVidas);
@@ -578,6 +599,10 @@ class Jogo {
 
       this.nFase = 2
 
+    }
+
+    exit(){
+      location.reload();
     }
 
     fase3(){
@@ -597,6 +622,7 @@ class Jogo {
       this.boss.iniciar(this.player2);
 
       //fundo
+      this.imagem1.destroy();
       this.imagem2.destroy();
 
       //plataform
@@ -606,7 +632,9 @@ class Jogo {
       this.plataformas.menosVelocidade = -150;
 
       //Piso
+      this.p1.destroy();
       this.p2.destroy();
+
 
 
       //casa

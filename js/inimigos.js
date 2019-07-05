@@ -22,7 +22,7 @@ class Inimigo{
 
     inimigo.events.onOutOfBounds.add(this.remove, this);
     
-    if(this.aleatorio<=1){
+    if(this.aleatorio < 1){
       inimigo.body.velocity.x = this.velocidade;
     }
     else if(this.aleatorio>1){

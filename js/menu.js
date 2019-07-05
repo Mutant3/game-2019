@@ -48,7 +48,6 @@ class Menu {
         
         game.time.events.repeat(Phaser.Timer.SECOND * 0.5, 10, this.carregarEstrelas, this);
 
-        alert('O Game e sons funcionam corretamente no FIREFOX!');
     }
     
     update(){
