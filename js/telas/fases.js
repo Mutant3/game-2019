@@ -42,12 +42,10 @@ class Fases {
         const exitBtn = game.add.button(game.world.centerX - 400, 540, 'botão', this.exit);
         
 
-        game.add.text(100, 270, 'A fase só pode ser escolhida uma vez pro sessão.', { fontSize: '25px', fill: 'blue' });
-
         //Botões Fases
         const fase1Btn = game.add.button(game.world.centerX - 315, 44, 'fase1', this.fase1);
-        const fase2Btn = game.add.button(game.world.centerX  +48, 37, 'fase2', this.fase2);
-        const fase3Btn = game.add.button(game.world.centerX - 315, 334, 'fase3', this.fase3);
+        const fase2Btn = game.add.button(game.world.centerX  +48, 37, 'fase2', this.fase1);
+        const fase3Btn = game.add.button(game.world.centerX - 315, 334, 'fase3', this.fase1);
 
         
         this.game.add.sprite(0, 0, 'quadros');
@@ -78,20 +76,6 @@ class Fases {
     fase1(){
         this.click = game.add.audio('click');
         this.click.play();
-        game.state.start('Game')
-    }
-
-    fase2(){
-        this.click = game.add.audio('click');
-        this.click.play();
-        fasesJogo = 2
-        game.state.start('Game')
-    }
-
-    fase3() {
-        this.click = game.add.audio('click');
-        this.click.play();
-        fasesJogo = 3
         game.state.start('Game')
     }
 }

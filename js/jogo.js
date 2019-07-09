@@ -63,19 +63,14 @@ class Jogo {
         this.vidas = new Vida();
         this.casas = new Casa();
        
-        
-              
-      }
 
+    }
     init() {
         this.physics.startSystem(Phaser.Physics.ARCADE);
     }
     preload() {
        //SKINS PERSONAGEM
        this.load.spritesheet('personagem', this.personagem.sprite, this.personagem.largura, this.personagem.altura);
-
-      this.load.image('botão', 'assets/buttons/Exit.png')
-
 
        //boss
        this.load.spritesheet('boss', this.boss.sprite1, this.boss.largura, this.boss.altura)
@@ -195,9 +190,6 @@ class Jogo {
         this.grupoPremios = this.add.physicsGroup();
         this.premios.iniciar(this.grupoPremios);
 
-      const exitBtn = game.add.button(game.world.centerX - 400, 540, 'botão', this.exit);
-
-
         // criação e probalidade inimigos e premios
         // for(this.limite=0; this.limite<=5; this.limite++){
         //   this.random = Math.random()*4;
@@ -224,15 +216,6 @@ class Jogo {
         }
 
 
-      if (fasesJogo == 2) {
-        this.fase2();
-      }
-      else if (fasesJogo == 3) {
-        this.fase3();
-      }
-      else {
-
-      } 
 
         }
 
@@ -601,10 +584,6 @@ class Jogo {
 
     }
 
-    exit(){
-      location.reload();
-    }
-
     fase3(){
       game.add.text(400, 300, 'FASE III', { fontSize: '25px', fill: 'white' });
       //inimigos
@@ -622,7 +601,6 @@ class Jogo {
       this.boss.iniciar(this.player2);
 
       //fundo
-      this.imagem1.destroy();
       this.imagem2.destroy();
 
       //plataform
@@ -632,9 +610,7 @@ class Jogo {
       this.plataformas.menosVelocidade = -150;
 
       //Piso
-      this.p1.destroy();
       this.p2.destroy();
-
 
 
       //casa
